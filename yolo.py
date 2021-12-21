@@ -28,7 +28,7 @@ class YOLO:
         class_ids, confidences, boxes = self.scan_through_detections(out)
 
         valid_detections = self.remove_overlapping_boxes(boxes, confidences)
-        self.final_scan(valid_detections, boxes, class_ids, confidences)
+        self.final_scan(valid_detections, boxes, class_ids)
         self.show_image()
 
     def read_classes(self):
@@ -61,12 +61,14 @@ class YOLO:
     def get_output_layers(self):
         try:
             layers = self.net.getLayerNames()
-            return [layers[i[0] - 1] for i in self.net.getUnconnectedOutLayers()]
+            return [layers[i - 1] for i in self.net.getUnconnectedOutLayers()]
         except:
             raise Exception("Unable to determine output layer names")
 
     def draw_bounding_box(self, class_id, x, y, w, h):
         try:
+            print(self.classes)
+            print(class_id)
             label = str(self.classes[class_id])
             color = np.random.uniform(0, 255, 3)
             cv2.rectangle(self.img, (x, y), (w, h), color, 2)
@@ -115,9 +117,8 @@ class YOLO:
         except:
             raise Exception("Error when applying non-max suppression")
 
-    def final_scan(self, indices, boxes, class_id, confidences):
+    def final_scan(self, indices, boxes, class_id):
         for i in indices:
-            i = i[0]
             box = boxes[i]
             x = box[0]
             y = box[1]

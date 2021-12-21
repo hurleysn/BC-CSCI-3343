@@ -121,7 +121,7 @@ def argsParser():
 if __name__ == "__main__":
     args = argsParser()
     if args["objectdetection"] == "YOLO":
-        yolo = YOLO(args["image"], config="/config/darknet.cfg", weights="/weights/darknet.weights")
+        yolo = YOLO(args["image"], config="config/darknet.cfg", weights="weights/darknet.weights")
     elif args["objectdetection"] == "HOG":
         HOGCV = cv2.HOGDescriptor()
         HOGCV.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
