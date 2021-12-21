@@ -1,4 +1,3 @@
-# (Matt) TODO => Clean up, abstract code and write documentation
 from cv2 import cv2
 import argparse
 import numpy as np
@@ -67,9 +66,8 @@ class YOLO:
 
     def draw_bounding_box(self, class_id, x, y, w, h):
         try:
-            print(self.classes)
-            print(class_id)
-            label = str(self.classes[class_id])
+            label = 'person'
+            #label = str(self.classes[class_id])
             color = np.random.uniform(0, 255, 3)
             cv2.rectangle(self.img, (x, y), (w, h), color, 2)
             cv2.putText(self.img, label, (x - 10, y - 10),
@@ -96,6 +94,7 @@ class YOLO:
         for output_layer in output_layers:
             for detection in output_layer:
                 scores = detection[5:]
+                # TODO => Determine how to properly find class_id
                 class_id = np.argmax(scores)
                 confidence = scores[class_id]
                 if confidence > self.confidence_limit:
