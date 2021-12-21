@@ -1,7 +1,9 @@
 import cv2
 import imutils
 import numpy as np
+import weights
 import argparse
+from yolo import YOLO
 
 
 def detect(frame):
@@ -110,14 +112,19 @@ def argsParser():
     arg_parse.add_argument("-i", "--image", default=None, help="path to Image File ")
     arg_parse.add_argument("-c", "--camera", default=False, help="Set true if you want to use the camera.")
     arg_parse.add_argument("-o", "--output", type=str, help="path to optional output video file")
+    arg_parse.add_argument("-od", "--objectdetection", type=str, help="YOLO/HOGSVM/HOG")
     args = vars(arg_parse.parse_args())
 
     return args
 
 
 if __name__ == "__main__":
-    HOGCV = cv2.HOGDescriptor()
-    HOGCV.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
-
     args = argsParser()
-    humanDetector(args)
+    if args["objectdetection"] == "YOLO":
+        yolo = YOLO(args["image"], config="/config/darknet.cfg", weights="/weights/darknet.weights")
+    elif args["objectdetection"] == "HOG":
+        HOGCV = cv2.HOGDescriptor()
+        HOGCV.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
+        humanDetector(args)
+
+

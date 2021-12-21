@@ -5,11 +5,11 @@ import numpy as np
 
 
 class YOLO:
-    def __init__(self, img, config, weights, classes, confidence_limit=.5, nms_threshold=.4, scale=.00392):
+    def __init__(self, img, config, weights, confidence_limit=.5, nms_threshold=.4, scale=.00392):
         self.img = None
         self.config = config
         self.weights = weights
-        self.classes = classes  # Maybe unneeded?
+        self.classes = None
         self.confidence_limit = confidence_limit
         self.nms_threshold = nms_threshold
         self.scale = scale
@@ -18,6 +18,7 @@ class YOLO:
         self.build_model(img)
 
     def build_model(self, img):
+        self.read_classes()
         self.read_image(img)
         self.read_model(self.weights, self.config)
         self.set_input_blob()
@@ -29,6 +30,10 @@ class YOLO:
         valid_detections = self.remove_overlapping_boxes(boxes, confidences)
         self.final_scan(valid_detections, boxes, class_ids, confidences)
         self.show_image()
+
+    def read_classes(self):
+        with open("objects.txt", 'r') as f:
+            self.classes = [line.strip() for line in f.readlines()]
 
     def read_image(self, img):
         try:
