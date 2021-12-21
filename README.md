@@ -79,6 +79,7 @@ python detect.py --input input/video_1.mp4 -c 4
 ## Demo/Results
 #### Work Done
 
+Please see the respective outputs folder for results of your commands.
 [Videos/images here]
 
 
