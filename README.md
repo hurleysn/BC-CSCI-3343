@@ -34,9 +34,10 @@ python main.py -i "SomePath/ToAnImage/Here.jpg" -od 'YOLO'
 
 ## Different Object Detection Methods
 
-### HOG w OpenCV (Sean)
+### HOG w OpenCV
 HOG is a ‘feature descriptor’, which takes an image and simplifies it by assigning ‘features’ to important information within the image, and gets rid of unnecessary information. The process begins by calculating the gradient, and from that getting the magnitude and direction. A Histogram of gradients is calculated in an 8x8 cell, and then normalized into a block of 16x16 cells. This all builds a Histogram of Oriented Gradients feature vector, concentrating more on the borders and the shape of the images to extract its features individually from the background. Overall, it's less efficient compared to other approaches such as Faster RCNN and takes longer to train.
 
+#### Results
 
 
 ### YOLO (Matt)
