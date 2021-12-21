@@ -11,6 +11,8 @@ In our project we will be creating a multi-use live human counter.  It will allo
 ```bash
 pip install opencv-python
 pip install numpy
+pip install imutils
+pip install argparse
 ```
 
 ### OpenCV
@@ -23,6 +25,7 @@ Some Description here....
 
 
 ## Usage
+Navigate to the root directory
 
 ```python
 Run some code here to start the program
