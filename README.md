@@ -61,15 +61,19 @@ library.
 There are seven stages to this model and implementation of the algorithm. It begins with extraction of the HOG features from the data set using samples. You train the positive and negative samples to create the model. These trained models are then used to generate detectors, which are used to identify the ‘false positive’ tests, or where the model detected a human that was not actually there. You again extract the HOG features from these samples, further training the model. THe object is then identified and the detection area, or bounding box, is optimized.
 
 Running the “Slow” Detection Algorithm:
+
 python hog_detector_vid.py --input ../input_videos/video1.mp4 --output ../outputs/video1_slow.mp4 --speed slow
 
 Running the “Fast” Detection Algorithm:
+
 python hog_detector_vid.py --input ../input_videos/video1.mp4 --output ../outputs/video1_fast.mp4 --speed fast
 
 ### Moving Object Detection using Frame Differencing (AJ)
 ### Description 
 Frame Differencing and Summing Technique (DST for short) is a very simple yet effective computer vision technique. We can use it to know whether there are any moving objects in a video or not.
+
 Running Code:
+
 python detect.py --input input/video_1.mp4 -c 4
 
 ## Demo/Results
